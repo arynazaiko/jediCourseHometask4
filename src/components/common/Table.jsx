@@ -5,7 +5,7 @@ import Button from "./Button";
 const Table = ({ columns, data, tableDescriptor, onDelete }) => {
   return (
     <div>
-      <table className="table table-hover">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th scope="col">{tableDescriptor}</th>
@@ -24,7 +24,7 @@ const Table = ({ columns, data, tableDescriptor, onDelete }) => {
               {columns.map((columnTitle, index) => (
                 <td key={index}>{item[columnTitle]}</td>
               ))}
-              <td>
+              <td className="text-center">
                 <Button
                   label="Delete"
                   classes="btn btn-danger"
