@@ -1,6 +1,15 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+
+import NotFound from "./components/NotFound";
+import PeoplePage from "./components/PeoplePage";
 
 function App() {
   return (
@@ -29,9 +38,13 @@ function App() {
         </nav>
         <div>
           <Switch>
-            <Route exact path="/" />
+            <Route exact path="/" component={PeoplePage} />
             <Route path="/planets" />
             <Route path="/starships" />
+            <Route path="/not-found" component={NotFound} />
+            <Route path="*">
+              <Redirect to="/not-found" />
+            </Route>
           </Switch>
         </div>
       </div>
