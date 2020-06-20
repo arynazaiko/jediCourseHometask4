@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-import Form from "./common/Form";
+import Form from "../components/common/Form";
 
 const EditPeoplePage = ({ people, setPeople }) => {
   const history = useHistory();

@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 
-import Table from "./common/Table";
-import Form from "./common/Form";
+import Table from "../components/common/Table";
+import Form from "../components/common/Form";
 
-import { planetsColumns as columns } from "./data.js";
+import { planetsColumns as columns } from "../components/data.js";
 
 const PlanetsPage = ({ planets, setPlanets }) => {
   const handleAddPlanets = (planet) => {

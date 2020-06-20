@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import Form from "./common/Form";
-import { peopleColumns as columns } from "./data";
+import Form from "../components/common/Form";
+import { peopleColumns as columns } from "../components/data";
 
 const NewPeoplePage = ({ people, setPeople }) => {
   const history = useHistory();

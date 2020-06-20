@@ -10,12 +10,14 @@ import {
 
 import { peopleData, planetsData, starshipsData } from "./components/data";
 
-import NotFound from "./components/NotFound";
-import PeoplePage from "./components/PeoplePage";
-import PlanetsPage from "./components/PlanetsPage";
-import StarshipsPage from "./components/StarshipsPage";
-import EditPeoplePage from "./components/EditPeoplePage";
-import NewPeoplePage from "./components/NewPeoplePage";
+import {
+  NotFound,
+  PeoplePage,
+  PlanetsPage,
+  StarshipsPage,
+  EditPeoplePage,
+  NewPeoplePage,
+} from "./pages";
 
 function App() {
   const [people, setPeople] = useState(peopleData);

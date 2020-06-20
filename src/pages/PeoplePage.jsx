@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 
-import Table from "./common/Table";
-import Button from "./common/Button";
+import Table from "../components/common/Table";
+import Button from "../components/common/Button";
 
-import { peopleColumns as columns } from "./data.js";
+import { peopleColumns as columns } from "../components/data.js";
 
 const PeoplePage = ({ people, setPeople }) => {
   const history = useHistory();

@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 
-import Table from "./common/Table";
-import Form from "./common/Form";
+import Table from "../components/common/Table";
+import Form from "../components/common/Form";
 
-import { starshipsColumns as columns } from "./data.js";
+import { starshipsColumns as columns } from "../components/data.js";
 
 const StarshipsPage = ({ starships, setStarships }) => {
   const handleAddStarships = (starship) => {
