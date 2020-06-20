@@ -3,6 +3,8 @@ import { useParams, useHistory } from "react-router-dom";
 
 import Form from "../components/common/Form";
 
+import { peopleColumns as columns } from "../components/data";
+
 const EditPeoplePage = ({ people, setPeople }) => {
   const history = useHistory();
   let { id } = useParams();
@@ -24,7 +26,11 @@ const EditPeoplePage = ({ people, setPeople }) => {
 
   return (
     <div className="container">
-      <Form data={findPerson()} onSubmit={handleEditPerson} />
+      <Form
+        initialData={findPerson()}
+        onSubmit={handleEditPerson}
+        columns={columns}
+      />
     </div>
   );
 };

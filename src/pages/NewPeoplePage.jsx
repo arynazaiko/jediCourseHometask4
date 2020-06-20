@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 import Form from "../components/common/Form";
+
 import { peopleColumns as columns } from "../components/data";
 
 const NewPeoplePage = ({ people, setPeople }) => {
