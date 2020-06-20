@@ -19,6 +19,8 @@ import {
   NewPeoplePage,
   EditPlanetsPage,
   NewPlanetsPage,
+  EditStarshipsPage,
+  NewStarshipsPage,
 } from "./pages";
 
 function App() {
@@ -99,6 +101,24 @@ function App() {
               path="/planets/new"
               render={() => (
                 <NewPlanetsPage planets={planets} setPlanets={setPlanets} />
+              )}
+            />
+            <Route
+              path="/starships/:id/edit"
+              render={() => (
+                <EditStarshipsPage
+                  starships={starships}
+                  setStarships={setStarships}
+                />
+              )}
+            />
+            <Route
+              path="/starships/new"
+              render={() => (
+                <NewStarshipsPage
+                  starships={starships}
+                  setStarships={setStarships}
+                />
               )}
             />
             <Route path="/">

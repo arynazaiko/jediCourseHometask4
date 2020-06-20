@@ -6,6 +6,8 @@ import EditPeoplePage from "./EditPeoplePage";
 import NewPeoplePage from "./NewPeoplePage";
 import EditPlanetsPage from "./EditPlanetsPage";
 import NewPlanetsPage from "./NewPlanetsPage";
+import EditStarshipsPage from "./EditStarshipsPage";
+import NewStarshipsPage from "./NewStarshipsPage";
 
 export {
   NotFound,
@@ -16,4 +18,6 @@ export {
   NewPeoplePage,
   EditPlanetsPage,
   NewPlanetsPage,
+  EditStarshipsPage,
+  NewStarshipsPage,
 };
