@@ -21,7 +21,8 @@ const EditPeoplePage = ({ people, setPeople }) => {
     person = { ...person, ...personData };
 
     setPeople(people.map((p) => (p.id === person.id ? person : p)));
-    history.push("people");
+
+    history.push("/people");
   };
 
   return (

@@ -17,6 +17,8 @@ import {
   StarshipsPage,
   EditPeoplePage,
   NewPeoplePage,
+  EditPlanetsPage,
+  NewPlanetsPage,
 } from "./pages";
 
 function App() {
@@ -58,12 +60,14 @@ function App() {
               )}
             />
             <Route
+              exact
               path="/planets"
               render={() => (
                 <PlanetsPage planets={planets} setPlanets={setPlanets} />
               )}
             />
             <Route
+              exact
               path="/starships"
               render={() => (
                 <StarshipsPage
@@ -83,6 +87,18 @@ function App() {
               path="/people/new"
               render={() => (
                 <NewPeoplePage people={people} setPeople={setPeople} />
+              )}
+            />
+            <Route
+              path="/planets/:id/edit"
+              render={() => (
+                <EditPlanetsPage planets={planets} setPlanets={setPlanets} />
+              )}
+            />
+            <Route
+              path="/planets/new"
+              render={() => (
+                <NewPlanetsPage planets={planets} setPlanets={setPlanets} />
               )}
             />
             <Route path="/">

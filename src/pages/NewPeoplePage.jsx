@@ -11,7 +11,7 @@ const NewPeoplePage = ({ people, setPeople }) => {
   const handleAddPerson = (personData) => {
     const data = [...people, personData];
     setPeople(data);
-    history.push("people");
+    history.push("/people");
   };
 
   return (

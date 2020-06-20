@@ -4,6 +4,8 @@ import PlanetsPage from "./PlanetsPage";
 import StarshipsPage from "./StarshipsPage";
 import EditPeoplePage from "./EditPeoplePage";
 import NewPeoplePage from "./NewPeoplePage";
+import EditPlanetsPage from "./EditPlanetsPage";
+import NewPlanetsPage from "./NewPlanetsPage";
 
 export {
   NotFound,
@@ -12,4 +14,6 @@ export {
   StarshipsPage,
   EditPeoplePage,
   NewPeoplePage,
+  EditPlanetsPage,
+  NewPlanetsPage,
 };
