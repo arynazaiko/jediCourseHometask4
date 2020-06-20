@@ -19,6 +19,13 @@ const PeoplePage = ({ people, setPeople }) => {
 
   return (
     <div className="container">
+      <Button
+        label="Add person"
+        classes="btn btn-success"
+        onClick={() => {
+          history.push("/people/new");
+        }}
+      />
       {people.length <= 0 ? (
         <h3 className="text-center mb-3">No data</h3>
       ) : (
@@ -29,13 +36,6 @@ const PeoplePage = ({ people, setPeople }) => {
             data={people}
             tableDescriptor="People"
             onDelete={deletePerson}
-          />
-          <Button
-            label="Add person"
-            classes="btn btn-success"
-            onClick={() => {
-              history.push("/people/new");
-            }}
           />
         </Fragment>
       )}

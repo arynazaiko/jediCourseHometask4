@@ -41,7 +41,10 @@ const Table = ({ columns, data, tableDescriptor, onDelete }) => {
                 <Button
                   label="Delete"
                   classes="btn btn-danger"
-                  onClick={() => onDelete(item.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    return onDelete(item.id);
+                  }}
                 />
               </td>
             </tr>
