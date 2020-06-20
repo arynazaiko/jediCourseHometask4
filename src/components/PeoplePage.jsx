@@ -1,22 +1,13 @@
 import React, { Fragment } from "react";
+import { useHistory } from "react-router-dom";
 
 import Table from "./common/Table";
-import Form from "./common/Form";
+import Button from "./common/Button";
 
 import { peopleColumns as columns } from "./data.js";
 
 const PeoplePage = ({ people, setPeople }) => {
-  const handleAppPerson = (personData) => {
-    const data = [...people, personData];
-    setPeople(data);
-  };
-
-  const getInitialPeopleData = () => {
-    return columns.reduce((cols, columnName) => {
-      cols[columnName] = "";
-      return cols;
-    }, {});
-  };
+  const history = useHistory();
 
   const deletePerson = (id) => {
     setPeople(
@@ -39,13 +30,15 @@ const PeoplePage = ({ people, setPeople }) => {
             tableDescriptor="People"
             onDelete={deletePerson}
           />
+          <Button
+            label="Add person"
+            classes="btn btn-success"
+            onClick={() => {
+              history.push("/people/new");
+            }}
+          />
         </Fragment>
       )}
-      <Form
-        initialData={getInitialPeopleData()}
-        columns={columns}
-        onAddData={handleAppPerson}
-      />
     </div>
   );
 };
