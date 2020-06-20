@@ -1,8 +1,16 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import Button from "./Button";
 
 const Table = ({ columns, data, tableDescriptor, onDelete }) => {
+  let history = useHistory();
+
+  const handleClick = (id) => {
+    const routeName = tableDescriptor.toLowerCase();
+    history.push(`/${routeName}/${id}/edit`);
+  };
+
   return (
     <div>
       <table className="table table-striped">
@@ -19,7 +27,12 @@ const Table = ({ columns, data, tableDescriptor, onDelete }) => {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              onClick={() => {
+                handleClick(item.id);
+              }}
+            >
               <th scope="row">{++index}</th>
               {columns.map((columnTitle, index) => (
                 <td key={index}>{item[columnTitle]}</td>
@@ -28,7 +41,10 @@ const Table = ({ columns, data, tableDescriptor, onDelete }) => {
                 <Button
                   label="Delete"
                   classes="btn btn-danger"
-                  onClick={() => onDelete(item.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    return onDelete(item.id);
+                  }}
                 />
               </td>
             </tr>

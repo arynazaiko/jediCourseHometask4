@@ -1,25 +1,15 @@
 import React, { Fragment } from "react";
+import { useHistory } from "react-router-dom";
 
-import Table from "./common/Table";
-import Form from "./common/Form";
+import Table from "../components/common/Table";
+import Button from "../components/common/Button";
 
-import { starshipsColumns as columns } from "./data.js";
+import { starshipsColumns as columns } from "../components/data.js";
 
 const StarshipsPage = ({ starships, setStarships }) => {
-  const handleAddStarships = (starship) => {
-    const data = [...starships, starship];
-    setStarships(data);
-  };
-
-  const getInitialStarshipssData = () => {
-    return columns.reduce((cols, columnName) => {
-      cols[columnName] = "";
-      return cols;
-    }, {});
-  };
+  const history = useHistory();
 
   const deleteStarship = (id) => {
-    console.log(starships);
     setStarships(
       starships.filter((starship) => {
         return starship.id !== id;
@@ -29,6 +19,13 @@ const StarshipsPage = ({ starships, setStarships }) => {
 
   return (
     <div className="container">
+      <Button
+        label="Add starship"
+        classes="btn btn-success"
+        onClick={() => {
+          history.push("/starships/new");
+        }}
+      />
       {starships.length <= 0 ? (
         <h3 className="text-center mb-3">No data</h3>
       ) : (
@@ -42,11 +39,6 @@ const StarshipsPage = ({ starships, setStarships }) => {
           />
         </Fragment>
       )}
-      <Form
-        initialData={getInitialStarshipssData()}
-        columns={columns}
-        onAddData={handleAddStarships}
-      />
     </div>
   );
 };

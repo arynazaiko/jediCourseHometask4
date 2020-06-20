@@ -1,22 +1,13 @@
 import React, { Fragment } from "react";
+import { useHistory } from "react-router-dom";
 
-import Table from "./common/Table";
-import Form from "./common/Form";
+import Table from "../components/common/Table";
+import Button from "../components/common/Button";
 
-import { planetsColumns as columns } from "./data.js";
+import { planetsColumns as columns } from "../components/data.js";
 
 const PlanetsPage = ({ planets, setPlanets }) => {
-  const handleAddPlanets = (planet) => {
-    const data = [...planets, planet];
-    setPlanets(data);
-  };
-
-  const getInitialPlanetsData = () => {
-    return columns.reduce((cols, columnName) => {
-      cols[columnName] = "";
-      return cols;
-    }, {});
-  };
+  const history = useHistory();
 
   const deletePlanet = (id) => {
     setPlanets(
@@ -28,6 +19,13 @@ const PlanetsPage = ({ planets, setPlanets }) => {
 
   return (
     <div className="container">
+      <Button
+        label="Add planet"
+        classes="btn btn-success"
+        onClick={() => {
+          history.push("/planets/new");
+        }}
+      />
       {planets.length <= 0 ? (
         <h3 className="text-center mb-3">No data</h3>
       ) : (
@@ -41,11 +39,6 @@ const PlanetsPage = ({ planets, setPlanets }) => {
           />
         </Fragment>
       )}
-      <Form
-        initialData={getInitialPlanetsData()}
-        columns={columns}
-        onAddData={handleAddPlanets}
-      />
     </div>
   );
 };

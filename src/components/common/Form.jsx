@@ -3,19 +3,17 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 
-const Form = ({ columns, initialData, onAddData }) => {
-  const [personData, setPersonData] = useState(initialData);
+const Form = ({ initialData = {}, onSubmit, columns }) => {
+  const [data, setData] = useState(initialData);
 
   const handleClick = (event) => {
     event.preventDefault();
-    onAddData(personData);
+    onSubmit(data);
   };
 
   const handleChange = (event) => {
     const { currentTarget: input } = event;
-    const data = { ...personData };
-    data[input.name] = input.value;
-    setPersonData(data);
+    setData({ ...data, [input.name]: input.value });
   };
 
   return (
@@ -25,7 +23,7 @@ const Form = ({ columns, initialData, onAddData }) => {
           key={columnName}
           name={columnName}
           label={columnName}
-          value={personData[columnName]}
+          value={data[columnName] || ""}
           type="input"
           onChange={handleChange}
         />

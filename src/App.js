@@ -10,10 +10,18 @@ import {
 
 import { peopleData, planetsData, starshipsData } from "./components/data";
 
-import NotFound from "./components/NotFound";
-import PeoplePage from "./components/PeoplePage";
-import PlanetsPage from "./components/PlanetsPage";
-import StarshipsPage from "./components/StarshipsPage";
+import {
+  NotFound,
+  PeoplePage,
+  PlanetsPage,
+  StarshipsPage,
+  EditPeoplePage,
+  NewPeoplePage,
+  EditPlanetsPage,
+  NewPlanetsPage,
+  EditStarshipsPage,
+  NewStarshipsPage,
+} from "./pages";
 
 function App() {
   const [people, setPeople] = useState(peopleData);
@@ -27,7 +35,7 @@ function App() {
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/people">
                   People
                 </Link>
               </li>
@@ -48,18 +56,20 @@ function App() {
           <Switch>
             <Route
               exact
-              path="/"
+              path="/people"
               render={() => (
                 <PeoplePage people={people} setPeople={setPeople} />
               )}
             />
             <Route
+              exact
               path="/planets"
               render={() => (
                 <PlanetsPage planets={planets} setPlanets={setPlanets} />
               )}
             />
             <Route
+              exact
               path="/starships"
               render={() => (
                 <StarshipsPage
@@ -69,6 +79,51 @@ function App() {
               )}
             />
             <Route path="/not-found" component={NotFound} />
+            <Route
+              path="/people/:id/edit"
+              render={() => (
+                <EditPeoplePage people={people} setPeople={setPeople} />
+              )}
+            />
+            <Route
+              path="/people/new"
+              render={() => (
+                <NewPeoplePage people={people} setPeople={setPeople} />
+              )}
+            />
+            <Route
+              path="/planets/:id/edit"
+              render={() => (
+                <EditPlanetsPage planets={planets} setPlanets={setPlanets} />
+              )}
+            />
+            <Route
+              path="/planets/new"
+              render={() => (
+                <NewPlanetsPage planets={planets} setPlanets={setPlanets} />
+              )}
+            />
+            <Route
+              path="/starships/:id/edit"
+              render={() => (
+                <EditStarshipsPage
+                  starships={starships}
+                  setStarships={setStarships}
+                />
+              )}
+            />
+            <Route
+              path="/starships/new"
+              render={() => (
+                <NewStarshipsPage
+                  starships={starships}
+                  setStarships={setStarships}
+                />
+              )}
+            />
+            <Route path="/">
+              <Redirect to="/people" />
+            </Route>
             <Route path="*">
               <Redirect to="/not-found" />
             </Route>
