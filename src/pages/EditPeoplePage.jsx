@@ -3,15 +3,13 @@ import { useParams, useHistory } from "react-router-dom";
 
 import Form from "../components/common/Form";
 
-import { peopleColumns as columns } from "../components/data";
-
 const EditPeoplePage = ({ people, setPeople }) => {
   const history = useHistory();
   let { id } = useParams();
 
   const findPerson = () => {
     return people.find((item) => {
-      return item.id === id;
+      return item.id === +id;
     });
   };
 
@@ -20,9 +18,21 @@ const EditPeoplePage = ({ people, setPeople }) => {
 
     person = { ...person, ...personData };
 
-    setPeople(people.map((p) => (p.id === person.id ? person : p)));
+    const newPerson = people.map((p) => (p.id === person.id ? person : p));
+
+    setPeople(newPerson);
+
+    localStorage.setItem("people", JSON.stringify(newPerson));
 
     history.push("/people");
+  };
+
+  const getColumnNames = () => {
+    if (!people.length) {
+      return [];
+    }
+
+    return Object.keys(people[0]);
   };
 
   return (
@@ -30,7 +40,7 @@ const EditPeoplePage = ({ people, setPeople }) => {
       <Form
         initialData={findPerson()}
         onSubmit={handleEditPerson}
-        columns={columns}
+        columns={getColumnNames()}
       />
     </div>
   );
