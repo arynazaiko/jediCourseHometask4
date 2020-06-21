@@ -1,20 +1,36 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import Table from "../components/common/Table";
 import Button from "../components/common/Button";
 
-import { planetsColumns as columns } from "../components/data.js";
+import { getPlanets } from "../services/swApiService";
 
 const PlanetsPage = ({ planets, setPlanets }) => {
   const history = useHistory();
 
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getPlanets();
+      setPlanets(data);
+    };
+    getData();
+  }, []);
+
   const deletePlanet = (id) => {
-    setPlanets(
-      planets.filter((planet) => {
-        return planet.id !== id;
-      })
-    );
+    const planet = planets.filter((planet) => {
+      return planet.id !== id;
+    });
+    setPlanets(planet);
+    localStorage.setItem("planets", JSON.stringify(planet));
+  };
+
+  const getColumnNames = () => {
+    if (!planets.length) {
+      return [];
+    }
+
+    return Object.keys(planets[0]);
   };
 
   return (
@@ -32,7 +48,7 @@ const PlanetsPage = ({ planets, setPlanets }) => {
         <Fragment>
           <h3 className="text-center mb-3">Planets</h3>
           <Table
-            columns={columns}
+            columns={getColumnNames()}
             data={planets}
             tableDescriptor="Planets"
             onDelete={deletePlanet}

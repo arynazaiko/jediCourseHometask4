@@ -8,7 +8,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import { planetsData, starshipsData } from "./components/data";
+import { starshipsData } from "./components/data";
 
 import {
   NotFound,
@@ -25,7 +25,7 @@ import {
 
 function App() {
   const [people, setPeople] = useState([]);
-  const [planets, setPlanets] = useState(planetsData);
+  const [planets, setPlanets] = useState([]);
   const [starships, setStarships] = useState(starshipsData);
 
   return (
