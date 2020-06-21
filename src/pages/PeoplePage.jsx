@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import Table from "../components/common/Table";
@@ -19,11 +18,11 @@ const PeoplePage = ({ people, setPeople }) => {
   }, []);
 
   const deletePerson = (id) => {
-    const newPeople = people.filter((person) => {
+    const person = people.filter((person) => {
       return person.id !== id;
     });
-    setPeople(newPeople);
-    localStorage.setItem("people", JSON.stringify(newPeople));
+    setPeople(person);
+    localStorage.setItem("people", JSON.stringify(person));
   };
 
   const getColumnNames = () => {
