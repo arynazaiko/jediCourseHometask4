@@ -68,4 +68,35 @@ const getPlanets = async () => {
   return planets;
 };
 
-export { getPeople, getPlanets };
+const getStarships = async () => {
+  let starshipsJSON = localStorage.getItem("starships");
+  let starships = starshipsJSON && JSON.parse(starshipsJSON);
+
+  if (!starships || !starships.length) {
+    localStorage.setItem("currentId", 1);
+    const starshipsResponse = await (await fetch(`${url}/starships`)).json();
+
+    starships = starshipsResponse.results.map(
+      ({ name, model, starship_class, manufacturer, crew, passengers }) => {
+        const id = +localStorage.getItem("currentId");
+        localStorage.setItem("currentId", id + 1);
+
+        return {
+          id,
+          name,
+          model,
+          starship_class,
+          manufacturer,
+          crew,
+          passengers,
+        };
+      }
+    );
+
+    localStorage.setItem("starships", JSON.stringify(starships));
+  }
+
+  return starships;
+};
+
+export { getPeople, getPlanets, getStarships };
