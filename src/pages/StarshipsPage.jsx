@@ -1,20 +1,36 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import Table from "../components/common/Table";
 import Button from "../components/common/Button";
 
-import { starshipsColumns as columns } from "../components/data.js";
+import { getStarships } from "../services/swApiService";
 
 const StarshipsPage = ({ starships, setStarships }) => {
   const history = useHistory();
 
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getStarships();
+      setStarships(data);
+    };
+    getData();
+  }, []);
+
   const deleteStarship = (id) => {
-    setStarships(
-      starships.filter((starship) => {
-        return starship.id !== id;
-      })
-    );
+    const starship = starships.filter((starship) => {
+      return starship.id !== id;
+    });
+    setStarships(starship);
+    localStorage.setItem("starships", JSON.stringify(starship));
+  };
+
+  const getColumnNames = () => {
+    if (!starships.length) {
+      return [];
+    }
+
+    return Object.keys(starships[0]);
   };
 
   return (
@@ -32,7 +48,7 @@ const StarshipsPage = ({ starships, setStarships }) => {
         <Fragment>
           <h3 className="text-center mb-3">Starships</h3>
           <Table
-            columns={columns}
+            columns={getColumnNames()}
             data={starships}
             tableDescriptor="Starships"
             onDelete={deleteStarship}

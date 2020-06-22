@@ -3,15 +3,13 @@ import { useParams, useHistory } from "react-router-dom";
 
 import Form from "../components/common/Form";
 
-import { planetsColumns as columns } from "../components/data";
-
 const EditPlanetsPage = ({ planets, setPlanets }) => {
   const history = useHistory();
   let { id } = useParams();
 
   const findPlanet = () => {
     return planets.find((planet) => {
-      return planet.id === id;
+      return planet.id === +id;
     });
   };
 
@@ -20,9 +18,21 @@ const EditPlanetsPage = ({ planets, setPlanets }) => {
 
     planet = { ...planet, ...planetData };
 
-    setPlanets(planets.map((p) => (p.id === planet.id ? planet : p)));
+    const newPlanet = planets.map((p) => (p.id === planet.id ? planet : p));
+
+    setPlanets(newPlanet);
+
+    localStorage.setItem("planets", JSON.stringify(newPlanet));
 
     history.push("/planets");
+  };
+
+  const getColumnNames = () => {
+    if (!planets.length) {
+      return [];
+    }
+
+    return Object.keys(planets[0]);
   };
 
   return (
@@ -30,7 +40,7 @@ const EditPlanetsPage = ({ planets, setPlanets }) => {
       <Form
         initialData={findPlanet()}
         onSubmit={handleEditPlanet}
-        columns={columns}
+        columns={getColumnNames()}
       />
     </div>
   );

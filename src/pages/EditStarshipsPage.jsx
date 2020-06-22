@@ -3,15 +3,13 @@ import { useParams, useHistory } from "react-router-dom";
 
 import Form from "../components/common/Form";
 
-import { starshipsColumns as columns } from "../components/data";
-
 const EditStarshipsPage = ({ starships, setStarships }) => {
   const history = useHistory();
   let { id } = useParams();
 
   const findStarship = () => {
     return starships.find((starship) => {
-      return starship.id === id;
+      return starship.id === +id;
     });
   };
 
@@ -20,9 +18,23 @@ const EditStarshipsPage = ({ starships, setStarships }) => {
 
     starship = { ...starship, ...starshipData };
 
-    setStarships(starships.map((s) => (s.id === starship.id ? starship : s)));
+    const newStarship = starships.map((s) =>
+      s.id === starship.id ? starship : s
+    );
+
+    setStarships(newStarship);
+
+    localStorage.setItem("starships", JSON.stringify(newStarship));
 
     history.push("/starships");
+  };
+
+  const getColumnNames = () => {
+    if (!starships.length) {
+      return [];
+    }
+
+    return Object.keys(starships[0]);
   };
 
   return (
@@ -30,7 +42,7 @@ const EditStarshipsPage = ({ starships, setStarships }) => {
       <Form
         initialData={findStarship()}
         onSubmit={handleEditStarship}
-        columns={columns}
+        columns={getColumnNames()}
       />
     </div>
   );

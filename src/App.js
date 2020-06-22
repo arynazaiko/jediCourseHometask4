@@ -8,8 +8,6 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import { peopleData, planetsData, starshipsData } from "./components/data";
-
 import {
   NotFound,
   PeoplePage,
@@ -24,9 +22,9 @@ import {
 } from "./pages";
 
 function App() {
-  const [people, setPeople] = useState(peopleData);
-  const [planets, setPlanets] = useState(planetsData);
-  const [starships, setStarships] = useState(starshipsData);
+  const [people, setPeople] = useState([]);
+  const [planets, setPlanets] = useState([]);
+  const [starships, setStarships] = useState([]);
 
   return (
     <Router>
