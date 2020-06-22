@@ -3,6 +3,8 @@ import { useParams, useHistory } from "react-router-dom";
 
 import Form from "../components/common/Form";
 
+import shema from "../services/starshipsValidationRules";
+
 const EditStarshipsPage = ({ starships, setStarships }) => {
   const history = useHistory();
   let { id } = useParams();
@@ -43,6 +45,7 @@ const EditStarshipsPage = ({ starships, setStarships }) => {
         initialData={findStarship()}
         onSubmit={handleEditStarship}
         columns={getColumnNames()}
+        validationSchema={shema}
       />
     </div>
   );

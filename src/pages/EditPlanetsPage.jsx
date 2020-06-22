@@ -3,6 +3,8 @@ import { useParams, useHistory } from "react-router-dom";
 
 import Form from "../components/common/Form";
 
+import shema from "../services/planetsValidationRules";
+
 const EditPlanetsPage = ({ planets, setPlanets }) => {
   const history = useHistory();
   let { id } = useParams();
@@ -41,6 +43,7 @@ const EditPlanetsPage = ({ planets, setPlanets }) => {
         initialData={findPlanet()}
         onSubmit={handleEditPlanet}
         columns={getColumnNames()}
+        validationSchema={shema}
       />
     </div>
   );

@@ -3,6 +3,8 @@ import { useParams, useHistory } from "react-router-dom";
 
 import Form from "../components/common/Form";
 
+import shema from "../services/peopleValidationRules";
+
 const EditPeoplePage = ({ people, setPeople }) => {
   const history = useHistory();
   let { id } = useParams();
@@ -41,6 +43,7 @@ const EditPeoplePage = ({ people, setPeople }) => {
         initialData={findPerson()}
         onSubmit={handleEditPerson}
         columns={getColumnNames()}
+        validationSchema={shema}
       />
     </div>
   );
