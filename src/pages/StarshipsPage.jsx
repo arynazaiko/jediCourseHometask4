@@ -36,7 +36,7 @@ const StarshipsPage = ({ starships, setStarships }) => {
   return (
     <div className="container">
       <Button
-        label="Add starship"
+        label="Create starship"
         classes="btn btn-success"
         onClick={() => {
           history.push("/starships/new");

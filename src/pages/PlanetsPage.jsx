@@ -36,7 +36,7 @@ const PlanetsPage = ({ planets, setPlanets }) => {
   return (
     <div className="container">
       <Button
-        label="Add planet"
+        label="Create planet"
         classes="btn btn-success"
         onClick={() => {
           history.push("/planets/new");
