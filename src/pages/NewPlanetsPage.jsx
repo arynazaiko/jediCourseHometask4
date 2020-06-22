@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 
 import Form from "../components/common/Form";
 
+import shema from "../services/planetsValidationRules";
+
 const NewPlanetsPage = ({ planets, setPlanets }) => {
   const history = useHistory();
 
@@ -23,7 +25,11 @@ const NewPlanetsPage = ({ planets, setPlanets }) => {
 
   return (
     <div className="container">
-      <Form onSubmit={handleAddPlanets} columns={getColumnNames()} />
+      <Form
+        onSubmit={handleAddPlanets}
+        columns={getColumnNames()}
+        validationSchema={shema}
+      />
     </div>
   );
 };

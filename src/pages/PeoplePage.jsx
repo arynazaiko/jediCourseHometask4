@@ -36,7 +36,7 @@ const PeoplePage = ({ people, setPeople }) => {
   return (
     <div className="container">
       <Button
-        label="Add person"
+        label="Create person"
         classes="btn btn-success"
         onClick={() => {
           history.push("/people/new");

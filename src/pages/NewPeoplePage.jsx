@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 
 import Form from "../components/common/Form";
 
+import shema from "../services/peopleValidationRules";
+
 const NewPeoplePage = ({ people, setPeople }) => {
   const history = useHistory();
 
@@ -23,7 +25,11 @@ const NewPeoplePage = ({ people, setPeople }) => {
 
   return (
     <div className="container">
-      <Form onSubmit={handleAddPerson} columns={getColumnNames()} />
+      <Form
+        onSubmit={handleAddPerson}
+        columns={getColumnNames()}
+        validationSchema={shema}
+      />
     </div>
   );
 };
