@@ -1,17 +1,28 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import Form from "../components/common/Form";
 
 import shema from "../services/peopleValidationRules";
+import { createPerson } from "../store/actions/people";
+import { getAllPeople } from "../store/selectors/people";
 
-const NewPeoplePage = ({ people, setPeople }) => {
+const NewPeoplePage = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const people = useSelector((state) => getAllPeople(state));
 
   const handleAddPerson = (personData) => {
-    const data = [...people, personData];
-    setPeople(data);
-    localStorage.setItem("people", JSON.stringify(data));
+    const id = +localStorage.getItem("currentId");
+    localStorage.setItem("currentId", id + 1);
+
+    personData.id = id;
+    const updatedPeople = [...people, personData];
+
+    dispatch(createPerson(personData));
+
+    localStorage.setItem("people", JSON.stringify(updatedPeople));
     history.push("/people");
   };
 

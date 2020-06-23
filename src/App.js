@@ -23,7 +23,6 @@ import {
 } from "./pages";
 
 function App() {
-  const [people, setPeople] = useState([]);
   const [planets, setPlanets] = useState([]);
   const [starships, setStarships] = useState([]);
 
@@ -67,13 +66,7 @@ function App() {
         </nav>
         <div>
           <Switch>
-            <Route
-              exact
-              path="/people"
-              render={() => (
-                <PeoplePage people={people} setPeople={setPeople} />
-              )}
-            />
+            <Route exact path="/people" render={() => <PeoplePage />} />
             <Route
               exact
               path="/planets"
@@ -92,18 +85,8 @@ function App() {
               )}
             />
             <Route path="/not-found" component={NotFound} />
-            <Route
-              path="/people/:id/edit"
-              render={() => (
-                <EditPeoplePage people={people} setPeople={setPeople} />
-              )}
-            />
-            <Route
-              path="/people/new"
-              render={() => (
-                <NewPeoplePage people={people} setPeople={setPeople} />
-              )}
-            />
+            <Route path="/people/:id/edit" render={() => <EditPeoplePage />} />
+            <Route path="/people/new" render={() => <NewPeoplePage />} />
             <Route
               path="/planets/:id/edit"
               render={() => (

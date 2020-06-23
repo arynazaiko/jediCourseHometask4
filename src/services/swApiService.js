@@ -14,12 +14,13 @@ const getPeople = async () => {
         localStorage.setItem("currentId", id + 1);
 
         return {
-          id,
           name,
           height,
           mass,
           gender,
           birth_year,
+          beloved: false,
+          id,
         };
       }
     );
