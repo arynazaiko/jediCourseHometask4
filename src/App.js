@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import {
   BrowserRouter as Router,
@@ -23,8 +23,6 @@ import {
 } from "./pages";
 
 function App() {
-  const [starships, setStarships] = useState([]);
-
   return (
     <Router>
       <div>
@@ -67,16 +65,7 @@ function App() {
           <Switch>
             <Route exact path="/people" render={() => <PeoplePage />} />
             <Route exact path="/planets" render={() => <PlanetsPage />} />
-            <Route
-              exact
-              path="/starships"
-              render={() => (
-                <StarshipsPage
-                  starships={starships}
-                  setStarships={setStarships}
-                />
-              )}
-            />
+            <Route exact path="/starships" render={() => <StarshipsPage />} />
             <Route path="/not-found" component={NotFound} />
             <Route path="/people/:id/edit" render={() => <EditPeoplePage />} />
             <Route path="/people/new" render={() => <NewPeoplePage />} />
@@ -87,22 +76,9 @@ function App() {
             <Route path="/planets/new" render={() => <NewPlanetsPage />} />
             <Route
               path="/starships/:id/edit"
-              render={() => (
-                <EditStarshipsPage
-                  starships={starships}
-                  setStarships={setStarships}
-                />
-              )}
+              render={() => <EditStarshipsPage />}
             />
-            <Route
-              path="/starships/new"
-              render={() => (
-                <NewStarshipsPage
-                  starships={starships}
-                  setStarships={setStarships}
-                />
-              )}
-            />
+            <Route path="/starships/new" render={() => <NewStarshipsPage />} />
             <Route path="/">
               <Redirect to="/people" />
             </Route>

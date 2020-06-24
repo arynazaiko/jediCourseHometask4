@@ -84,13 +84,14 @@ const getStarships = async () => {
         localStorage.setItem("currentId", id + 1);
 
         return {
-          id,
           name,
           model,
           starship_class,
           manufacturer,
           crew,
           passengers,
+          beloved: false,
+          id,
         };
       }
     );

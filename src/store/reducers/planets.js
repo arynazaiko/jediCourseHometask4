@@ -21,7 +21,7 @@ const defaultPlanet = {
   id: null,
 };
 
-const planetReducer = (state = initialState, action) => {
+const planetsReducer = (state = initialState, action) => {
   let planet;
   let allPlanets;
 
@@ -76,4 +76,4 @@ const planetReducer = (state = initialState, action) => {
   }
 };
 
-export default planetReducer;
+export default planetsReducer;
