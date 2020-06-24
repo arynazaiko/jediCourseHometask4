@@ -52,13 +52,14 @@ const getPlanets = async () => {
         localStorage.setItem("currentId", id + 1);
 
         return {
-          id,
           name,
           diameter,
           rotation_period,
           orbital_period,
           gravity,
           population,
+          beloved: false,
+          id,
         };
       }
     );
