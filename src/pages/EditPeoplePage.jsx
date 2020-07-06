@@ -1,12 +1,17 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import Form from "../components/common/Form";
 
 import shema from "../services/peopleValidationRules";
+import { editPerson } from "../store/actions/people";
+import { getAllPeople } from "../store/selectors/people";
 
-const EditPeoplePage = ({ people, setPeople }) => {
+const EditPeoplePage = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const people = useSelector((state) => getAllPeople(state));
   let { id } = useParams();
 
   const findPerson = () => {
@@ -19,13 +24,11 @@ const EditPeoplePage = ({ people, setPeople }) => {
     let person = findPerson();
 
     person = { ...person, ...personData };
+    const data = people.map((p) => (p.id === person.id ? person : p));
 
-    const newPerson = people.map((p) => (p.id === person.id ? person : p));
+    dispatch(editPerson(personData));
 
-    setPeople(newPerson);
-
-    localStorage.setItem("people", JSON.stringify(newPerson));
-
+    localStorage.setItem("people", JSON.stringify(data));
     history.push("/people");
   };
 

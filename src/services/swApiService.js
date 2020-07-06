@@ -14,12 +14,13 @@ const getPeople = async () => {
         localStorage.setItem("currentId", id + 1);
 
         return {
-          id,
           name,
           height,
           mass,
           gender,
           birth_year,
+          beloved: false,
+          id,
         };
       }
     );
@@ -51,13 +52,14 @@ const getPlanets = async () => {
         localStorage.setItem("currentId", id + 1);
 
         return {
-          id,
           name,
           diameter,
           rotation_period,
           orbital_period,
           gravity,
           population,
+          beloved: false,
+          id,
         };
       }
     );
@@ -82,13 +84,14 @@ const getStarships = async () => {
         localStorage.setItem("currentId", id + 1);
 
         return {
-          id,
           name,
           model,
           starship_class,
           manufacturer,
           crew,
           passengers,
+          beloved: false,
+          id,
         };
       }
     );

@@ -1,12 +1,17 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import Form from "../components/common/Form";
 
 import shema from "../services/starshipsValidationRules";
+import { editStarship } from "../store/actions/starships";
+import { getAllStarships } from "../store/selectors/starships";
 
-const EditStarshipsPage = ({ starships, setStarships }) => {
+const EditStarshipsPage = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const starships = useSelector((state) => getAllStarships(state));
   let { id } = useParams();
 
   const findStarship = () => {
@@ -19,15 +24,11 @@ const EditStarshipsPage = ({ starships, setStarships }) => {
     let starship = findStarship();
 
     starship = { ...starship, ...starshipData };
+    const data = starships.map((s) => (s.id === starship.id ? starship : s));
 
-    const newStarship = starships.map((s) =>
-      s.id === starship.id ? starship : s
-    );
+    dispatch(editStarship(starshipData));
 
-    setStarships(newStarship);
-
-    localStorage.setItem("starships", JSON.stringify(newStarship));
-
+    localStorage.setItem("starships", JSON.stringify(data));
     history.push("/starships");
   };
 

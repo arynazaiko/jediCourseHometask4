@@ -1,28 +1,48 @@
 import React, { Fragment, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import Table from "../components/common/Table";
 import Button from "../components/common/Button";
 
 import { getPlanets } from "../services/swApiService";
+import {
+  setPlanets,
+  deletePlanet,
+  changeBelovedStatus,
+} from "../store/actions/planets";
+import { getAllPlanets } from "../store/selectors/planets";
 
-const PlanetsPage = ({ planets, setPlanets }) => {
+const PlanetsPage = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const planets = useSelector((state) => getAllPlanets(state));
 
   useEffect(() => {
     const getData = async () => {
       const data = await getPlanets();
-      setPlanets(data);
+      dispatch(setPlanets(data));
     };
     getData();
   }, []);
 
-  const deletePlanet = (id) => {
-    const planet = planets.filter((planet) => {
+  const handleDeletePlanet = (id) => {
+    const filteredPlanets = planets.filter((planet) => {
       return planet.id !== id;
     });
-    setPlanets(planet);
-    localStorage.setItem("planets", JSON.stringify(planet));
+    dispatch(deletePlanet(id));
+    localStorage.setItem("planets", JSON.stringify(filteredPlanets));
+  };
+
+  const handleBelovedStatus = (id) => {
+    const data = planets.map((planets) => {
+      return planets.id === +id
+        ? { ...planets, beloved: !planets.beloved }
+        : planets;
+    });
+
+    dispatch(changeBelovedStatus(id));
+    localStorage.setItem("planets", JSON.stringify(data));
   };
 
   const getColumnNames = () => {
@@ -37,7 +57,7 @@ const PlanetsPage = ({ planets, setPlanets }) => {
     <div className="container">
       <Button
         label="Create planet"
-        classes="btn btn-success"
+        classes="btn btn-warning text-white"
         onClick={() => {
           history.push("/planets/new");
         }}
@@ -46,12 +66,13 @@ const PlanetsPage = ({ planets, setPlanets }) => {
         <h3 className="text-center mb-3">No data</h3>
       ) : (
         <Fragment>
-          <h3 className="text-center mb-3">Planets</h3>
+          <h3 className="text-center mb-3">Planets from Star Wars Universe</h3>
           <Table
             columns={getColumnNames()}
             data={planets}
             tableDescriptor="Planets"
-            onDelete={deletePlanet}
+            onDelete={handleDeletePlanet}
+            belovedStatus={handleBelovedStatus}
           />
         </Fragment>
       )}

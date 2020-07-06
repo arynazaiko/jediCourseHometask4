@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import {
   BrowserRouter as Router,
@@ -23,10 +23,6 @@ import {
 } from "./pages";
 
 function App() {
-  const [people, setPeople] = useState([]);
-  const [planets, setPlanets] = useState([]);
-  const [starships, setStarships] = useState([]);
-
   return (
     <Router>
       <div>
@@ -67,73 +63,22 @@ function App() {
         </nav>
         <div>
           <Switch>
-            <Route
-              exact
-              path="/people"
-              render={() => (
-                <PeoplePage people={people} setPeople={setPeople} />
-              )}
-            />
-            <Route
-              exact
-              path="/planets"
-              render={() => (
-                <PlanetsPage planets={planets} setPlanets={setPlanets} />
-              )}
-            />
-            <Route
-              exact
-              path="/starships"
-              render={() => (
-                <StarshipsPage
-                  starships={starships}
-                  setStarships={setStarships}
-                />
-              )}
-            />
+            <Route exact path="/people" render={() => <PeoplePage />} />
+            <Route exact path="/planets" render={() => <PlanetsPage />} />
+            <Route exact path="/starships" render={() => <StarshipsPage />} />
             <Route path="/not-found" component={NotFound} />
-            <Route
-              path="/people/:id/edit"
-              render={() => (
-                <EditPeoplePage people={people} setPeople={setPeople} />
-              )}
-            />
-            <Route
-              path="/people/new"
-              render={() => (
-                <NewPeoplePage people={people} setPeople={setPeople} />
-              )}
-            />
+            <Route path="/people/:id/edit" render={() => <EditPeoplePage />} />
+            <Route path="/people/new" render={() => <NewPeoplePage />} />
             <Route
               path="/planets/:id/edit"
-              render={() => (
-                <EditPlanetsPage planets={planets} setPlanets={setPlanets} />
-              )}
+              render={() => <EditPlanetsPage />}
             />
-            <Route
-              path="/planets/new"
-              render={() => (
-                <NewPlanetsPage planets={planets} setPlanets={setPlanets} />
-              )}
-            />
+            <Route path="/planets/new" render={() => <NewPlanetsPage />} />
             <Route
               path="/starships/:id/edit"
-              render={() => (
-                <EditStarshipsPage
-                  starships={starships}
-                  setStarships={setStarships}
-                />
-              )}
+              render={() => <EditStarshipsPage />}
             />
-            <Route
-              path="/starships/new"
-              render={() => (
-                <NewStarshipsPage
-                  starships={starships}
-                  setStarships={setStarships}
-                />
-              )}
-            />
+            <Route path="/starships/new" render={() => <NewStarshipsPage />} />
             <Route path="/">
               <Redirect to="/people" />
             </Route>

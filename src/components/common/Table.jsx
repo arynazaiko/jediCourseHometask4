@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import Button from "./Button";
 
-const Table = ({ columns, data, tableDescriptor, onDelete }) => {
+const Table = ({ columns, data, tableDescriptor, onDelete, belovedStatus }) => {
   let history = useHistory();
 
   const handleClick = (id) => {
@@ -28,15 +28,33 @@ const Table = ({ columns, data, tableDescriptor, onDelete }) => {
         <tbody>
           {data.map((item, index) => (
             <tr
-              key={index}
+              key={item.id}
               onClick={() => {
                 handleClick(item.id);
               }}
             >
               <th scope="row">{++index}</th>
-              {columns.map((columnTitle, index) => (
-                <td key={index}>{item[columnTitle]}</td>
-              ))}
+              {columns.map((columnTitle) => {
+                return (
+                  <td key={columnTitle}>
+                    {columnTitle === "beloved" ? (
+                      <input
+                        type="checkbox"
+                        key={item.id}
+                        checked={item.beloved}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                        onChange={(e) => {
+                          belovedStatus(item.id);
+                        }}
+                      />
+                    ) : (
+                      item[columnTitle]
+                    )}
+                  </td>
+                );
+              })}
               <td className="text-center">
                 <Button
                   label="Delete"

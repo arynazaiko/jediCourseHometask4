@@ -41,16 +41,20 @@ const Form = ({ initialData = {}, onSubmit, columns, validationSchema }) => {
         <div className="alert alert-danger">{errorMessage}</div>
       ) : null}
       <form className="mb-3">
-        {columns.map((columnName) => (
-          <Input
-            key={columnName}
-            name={columnName}
-            label={columnName}
-            value={data[columnName] || ""}
-            type="input"
-            onChange={handleChange}
-          />
-        ))}
+        {columns.map((columnName) => {
+          return columnName !== "id" && columnName !== "beloved" ? (
+            <Input
+              key={columnName}
+              name={columnName}
+              label={columnName}
+              value={data[columnName] || ""}
+              type="input"
+              onChange={handleChange}
+            />
+          ) : (
+            ""
+          );
+        })}
         <Button label="Save" classes="btn btn-primary" onClick={handleClick} />
       </form>
     </div>

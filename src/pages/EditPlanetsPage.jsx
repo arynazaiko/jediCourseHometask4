@@ -1,12 +1,17 @@
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import Form from "../components/common/Form";
 
 import shema from "../services/planetsValidationRules";
+import { editPlanet } from "../store/actions/planets";
+import { getAllPlanets } from "../store/selectors/planets";
 
-const EditPlanetsPage = ({ planets, setPlanets }) => {
+const EditPlanetsPage = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const planets = useSelector((state) => getAllPlanets(state));
   let { id } = useParams();
 
   const findPlanet = () => {
@@ -19,13 +24,11 @@ const EditPlanetsPage = ({ planets, setPlanets }) => {
     let planet = findPlanet();
 
     planet = { ...planet, ...planetData };
+    const data = planets.map((p) => (p.id === planet.id ? planet : p));
 
-    const newPlanet = planets.map((p) => (p.id === planet.id ? planet : p));
+    dispatch(editPlanet(planetData));
 
-    setPlanets(newPlanet);
-
-    localStorage.setItem("planets", JSON.stringify(newPlanet));
-
+    localStorage.setItem("planets", JSON.stringify(data));
     history.push("/planets");
   };
 
